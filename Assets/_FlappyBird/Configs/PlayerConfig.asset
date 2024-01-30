@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c57eb989132e2c4eabe671d6feb9f97, type: 3}
-  m_Name: SettingObstaclesConfig
+  m_Script: {fileID: 11500000, guid: 1614bfc98241e064ba661bd7959d76ba, type: 3}
+  m_Name: PlayerConfig
   m_EditorClassIdentifier: 
-  <HorizontalDistance>k__BackingField: 5.6
-  <Speed>k__BackingField: 4
-  <UpperPointY>k__BackingField: 5
-  <LowerPointY>k__BackingField: -2.8
+  <ForceBounce>k__BackingField: 9
