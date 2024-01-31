@@ -37,13 +37,15 @@ namespace FlappyBird
         {
             var isPositionChanged = false;
 
-            var screenCoordinateEarth = _camera.WorldToViewportPoint(_earths[_leftmostIndex].position +
-                                                                            new Vector3(_earths[_leftmostIndex].lossyScale.x / 2, 0, 0));
-
+            var screenCoordinateEarth = _camera.WorldToViewportPoint(_earths[_leftmostIndex].position);
+            
             if (screenCoordinateEarth.x < 0)
             {
-                _earths[_leftmostIndex].position = new Vector2(_earths[_leftmostIndex].position.x + _earths[_leftmostIndex].lossyScale.x * 2,
-                                                                 _earths[_leftmostIndex].position.y);
+                var distanceBetweenEarth = _earths[GetNextIndex(_leftmostIndex)].localPosition.x -
+                                           _earths[_leftmostIndex].localPosition.x;
+
+                _earths[_leftmostIndex].localPosition = new Vector2(_earths[_leftmostIndex].localPosition.x + distanceBetweenEarth * 2,
+                                                                  _earths[_leftmostIndex].localPosition.y);
 
                 isPositionChanged = true;
             }
@@ -53,11 +55,14 @@ namespace FlappyBird
             if (!_ct[_leftmostIndex].IsCancellationRequested && _play)
             {
                 if (isPositionChanged)
-                    _leftmostIndex = (_leftmostIndex + 1) % _earths.Length;
-
+                    _leftmostIndex = GetNextIndex(_leftmostIndex);
+                
                 Move().Forget();
             }
         }
+
+        private int GetNextIndex(int current)
+            => (current + 1) % _earths.Length;
 
         private void FillCancellationToken()
         {

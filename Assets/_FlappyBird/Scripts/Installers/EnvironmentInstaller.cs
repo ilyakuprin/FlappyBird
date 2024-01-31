@@ -16,8 +16,8 @@ namespace FlappyBird
         private ObstacleFactory _obstacleFactory;
         private SettingPositionYObstacle _settingPositionYObstacle;
 
-        public MovementObstacle Columns { get; private set; }
-        public MovementObstacle Earth { get; private set; }
+        public IMove Columns { get; private set; }
+        public IMove Earth { get; private set; }
 
         public override void InstallBindings()
         {
