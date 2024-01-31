@@ -25,6 +25,10 @@ namespace FlappyBird
         {
             _trigger = _player.gameObject.GetAsyncCollisionEnter2DTrigger();
             _ct = _player.gameObject.GetCancellationTokenOnDestroy();
+        }
+
+        public void Start()
+        {
             Wait().Forget();
         }
 

@@ -5,7 +5,7 @@ using Zenject;
 
 namespace FlappyBird
 {
-    public class MovementObstacle : IInitializable, IMove
+    public class MovementObstacle : IInitializable
     {
         private readonly float _speed;
         private readonly Transform _parent;
@@ -26,7 +26,6 @@ namespace FlappyBird
         public void Initialize()
         {
             _ct = _parent.GetCancellationTokenOnDestroy();
-            StartMove();
         }
 
         public void StartMove()

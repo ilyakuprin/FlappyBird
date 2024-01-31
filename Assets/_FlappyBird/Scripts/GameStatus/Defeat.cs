@@ -5,12 +5,14 @@ namespace FlappyBird
 {
     public class Defeat : IInitializable, IDisposable
     {
+        public event Action Lost;
+
         private readonly PlayerDeath _playerDeath;
-        private readonly IMove[] _moves;
+        private readonly MovementObstacle[] _moves;
         private readonly PlayerBouncing _bouncing;
 
         public Defeat(PlayerDeath playerDeath,
-                      IMove[] moves,
+                      MovementObstacle[] moves,
                       PlayerBouncing bouncing)
         {
             _playerDeath = playerDeath;
@@ -27,6 +29,8 @@ namespace FlappyBird
                 move.StopMove();
 
             _bouncing.Dispose();
+
+            Lost?.Invoke();
         }
 
         public void Dispose()

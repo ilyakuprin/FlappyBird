@@ -4,7 +4,7 @@ using Zenject;
 
 namespace FlappyBird
 {
-    public class PlayerBouncing : IInitializable, IDisposable
+    public class PlayerBouncing : IDisposable
     {
         private readonly PlayerInput _input;
         private readonly Rigidbody2D _player;
@@ -19,14 +19,20 @@ namespace FlappyBird
             _force = config.ForceBounce;
         }
 
-        public void Initialize()
-            => _input.Inputted += Bounce;
+        public void Subscribe()
+        {
+            _input.Inputted += Bounce;
+            Jump();
+        }
 
         private void Bounce(InputData inputData)
         {
             if (inputData.Jump)
-                _player.velocity = new Vector2(_player.velocity.x, _force);
+                Jump();
         }
+
+        private void Jump()
+            => _player.velocity = new Vector2(_player.velocity.x, _force);
 
         public void Dispose()
             => _input.Inputted -= Bounce;

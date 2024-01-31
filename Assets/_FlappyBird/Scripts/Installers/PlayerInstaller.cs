@@ -5,11 +5,10 @@ namespace FlappyBird
 {
     public class PlayerInstaller : MonoInstaller
     {
-        [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private PlayerConfig _config;
+        [field: SerializeField] public Rigidbody2D Rigidbody { get; private set; }
 
-        private PlayerInput _playerInput;
-
+        public PlayerInput PlayerInput { get; private set; }
         public PlayerDeath Death { get; private set; }
         public PlayerBouncing PlayerBouncing { get; private set; }
 
@@ -24,25 +23,25 @@ namespace FlappyBird
 
         private void BindSerializeField()
         {
-            Container.Bind<Rigidbody2D>().FromInstance(_rigidbody).AsSingle();
+            Container.Bind<Rigidbody2D>().FromInstance(Rigidbody).AsSingle();
             Container.Bind<PlayerConfig>().FromInstance(_config).AsSingle();
         }
 
         private void BindPlayerBouncing()
         {
-            PlayerBouncing = new PlayerBouncing(_playerInput, _rigidbody, _config);
-            Container.BindInterfacesAndSelfTo<PlayerBouncing>().FromInstance(PlayerBouncing).AsSingle();
+            PlayerBouncing = new PlayerBouncing(PlayerInput, Rigidbody, _config);
+            Container.BindInterfacesAndSelfTo<PlayerBouncing>().FromInstance(PlayerBouncing).AsSingle().NonLazy();
         }
 
         private void BindPlayerInput()
         {
-            _playerInput = new PlayerInput();
-            Container.BindInterfacesAndSelfTo<PlayerInput>().FromInstance(_playerInput).AsSingle();
+            PlayerInput = new PlayerInput();
+            Container.BindInterfacesAndSelfTo<PlayerInput>().FromInstance(PlayerInput).AsSingle();
         }
 
         private void BindPlayerDeath()
         {
-            Death = new PlayerDeath(_rigidbody);
+            Death = new PlayerDeath(Rigidbody);
             Container.BindInterfacesAndSelfTo<PlayerDeath>().FromInstance(Death).AsSingle();
         }
     }
