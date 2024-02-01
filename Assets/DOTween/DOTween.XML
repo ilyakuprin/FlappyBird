@@ -360,7 +360,7 @@
             Calculates a point along the given Cubic Bezier segment-curve.<para/>
             </summary>
             <param name="startPoint">Segment start point</param>
-            <param name="startControlPoint">Start point's control point/handle</param>
+            <param name="startControlPoint">StartWait point's control point/handle</param>
             <param name="endPoint">Segment end point</param>
             <param name="endControlPoint">End point's control point/handle</param>
             <param name="factor">0-1 percentage along which to retrieve point</param>
@@ -369,8 +369,8 @@
             <summary>
             Returns an array containing a series of points along the given Cubic Bezier segment-curve.<para/>
             </summary>
-            <param name="startPoint">Start point</param>
-            <param name="startControlPoint">Start point's control point/handle</param>
+            <param name="startPoint">StartWait point</param>
+            <param name="startControlPoint">StartWait point's control point/handle</param>
             <param name="endPoint">End point</param>
             <param name="endControlPoint">End point's control point/handle</param>
             <param name="resolution">Cloud resolution (min: 2)</param>
@@ -379,8 +379,8 @@
             <summary>
             Calculates a series of points along the given Cubic Bezier segment-curve and adds them to the given list.<para/>
             </summary>
-            <param name="startPoint">Start point</param>
-            <param name="startControlPoint">Start point's control point/handle</param>
+            <param name="startPoint">StartWait point</param>
+            <param name="startControlPoint">StartWait point's control point/handle</param>
             <param name="endPoint">End point</param>
             <param name="endControlPoint">End point's control point/handle</param>
             <param name="resolution">Cloud resolution (min: 2)</param>

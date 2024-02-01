@@ -19,15 +19,21 @@ namespace FlappyBird
         public MovementObstacle Columns { get; private set; }
         public MovementObstacle Earth { get; private set; }
 
-        public Transform ParentColumn { get => _parentColumn;}
+        public Transform ParentColumn => _parentColumn;
 
         public override void InstallBindings()
         {
+            BindCamera();
             BindSettingPositionYObstacle();
             BindObstacleFactory();
             BindSerializeField();
             BindMovementColumns();
             BindMovementEarth();
+        }
+
+        private void BindCamera()
+        {
+            Container.BindInterfacesAndSelfTo<Camera>().FromInstance(_camera).AsSingle();
         }
 
         private void BindSettingPositionYObstacle()

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -19,17 +20,21 @@ namespace FlappyBird
         [SerializeField] private Button _playButton;
         [SerializeField] private Image _panelGetReadyCanvas;
         [SerializeField] private Canvas _getReadyCanvas;
+        [SerializeField] private TextMeshProUGUI _text;
+        [SerializeField] private TextMeshProUGUI _currentResult;
+        [SerializeField] private TextMeshProUGUI _bestResult;
 
         private Defeat _defeat;
         private GameOverOkButton _gameOverOkButton;
         private CanvasDefeatBlackout _canvasDefeatBlackout;
-        private PlayButton _play;
+        private UiButton _ui;
         private CanvasMenuBlackoutRemoval _menu;
         private CanvasGetReadyUnFade _canvasGetReadyUnFade;
         private SimulatedRigidbody _simulatedRigidbody;
 
         public override void InstallBindings()
         {
+            TextMeshProUGUI();
             BindAnimator();
             BindDefeat();
             BindStoppingAnimation();
@@ -47,6 +52,14 @@ namespace FlappyBird
             BindSimulatedRigidbody();
             BindGettingReady();
             BindStartingMovementEarthParent();
+            BindViewScoreCounter();
+            BindViewResult();
+            BindShowingResults();
+        }
+
+        private void TextMeshProUGUI()
+        {
+            Container.Bind<TextMeshProUGUI>().FromInstance(_text).AsSingle();
         }
 
         private void BindAnimator()
@@ -86,13 +99,13 @@ namespace FlappyBird
 
         private void BindPlayButton()
         {
-            _play = new PlayButton(_playButton);
-            Container.BindInterfacesAndSelfTo<PlayButton>().FromInstance(_play).AsSingle();
+            _ui = new UiButton(_playButton);
+            Container.BindInterfacesAndSelfTo<UiButton>().FromInstance(_ui).AsTransient();
         }
 
         private void BindCanvasMenuBlackoutRemoval()
         {
-            _menu = new CanvasMenuBlackoutRemoval(_canvasDefeatBlackout, _uiConfig.TimeBlackout, _panelMenuCanvas, _play);
+            _menu = new CanvasMenuBlackoutRemoval(_canvasDefeatBlackout, _uiConfig.TimeBlackout, _panelMenuCanvas, _ui);
             Container.BindInterfacesAndSelfTo<CanvasMenuBlackoutRemoval>().FromInstance(_menu).AsSingle();
         }
 
@@ -132,7 +145,7 @@ namespace FlappyBird
 
         private void BindSimulatedRigidbody()
         {
-            _simulatedRigidbody = new SimulatedRigidbody(_playerInstaller.Rigidbody, _menu);
+            _simulatedRigidbody = new SimulatedRigidbody(_playerInstaller.Player, _menu);
             Container.BindInterfacesAndSelfTo<SimulatedRigidbody>().FromInstance(_simulatedRigidbody).AsSingle();
         }
 
@@ -161,6 +174,22 @@ namespace FlappyBird
             var startingMovementEarthParent =
                 new StartingMovementEarthParent(_canvasDefeatBlackout, _environment.Earth);
             Container.BindInterfacesAndSelfTo<StartingMovementEarthParent>().FromInstance(startingMovementEarthParent).AsSingle();
+        }
+
+        private void BindViewScoreCounter()
+        {
+            Container.BindInterfacesAndSelfTo<ViewScoreCounter>().AsSingle();
+        }
+
+        private void BindViewResult()
+        {
+            var viewResult = new ViewResult(_currentResult, _bestResult);
+            Container.BindInterfacesAndSelfTo<ViewResult>().FromInstance(viewResult).AsSingle();
+        }
+
+        private void BindShowingResults()
+        {
+            Container.BindInterfacesAndSelfTo<ShowingResults>().AsSingle();
         }
     }
 }

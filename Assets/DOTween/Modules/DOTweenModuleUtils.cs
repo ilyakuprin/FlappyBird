@@ -88,7 +88,7 @@ namespace DG.Tweening
             public static void SetOrientationOnPath(PathOptions options, Tween t, Quaternion newRot, Transform trans)
             {
 #if false // PHYSICS_MARKER
-                if (options.isRigidbody) ((Rigidbody)t.target).rotation = newRot;
+                if (options.isRigidbody) ((Player)t.target).rotation = newRot;
                 else trans.rotation = newRot;
 #else
                 trans.rotation = newRot;
@@ -116,7 +116,7 @@ namespace DG.Tweening
             public static bool HasRigidbody(Component target)
             {
 #if false // PHYSICS_MARKER
-                return target.GetComponent<Rigidbody>() != null;
+                return target.GetComponent<Player>() != null;
 #else
                 return false;
 #endif
@@ -133,7 +133,7 @@ namespace DG.Tweening
                 bool rBodyFoundAndTweened = false;
 #if false // PHYSICS_MARKER
                 if (tweenRigidbody) {
-                    Rigidbody rBody = target.GetComponent<Rigidbody>();
+                    Player rBody = target.GetComponent<Player>();
                     if (rBody != null) {
                         rBodyFoundAndTweened = true;
                         t = isLocal

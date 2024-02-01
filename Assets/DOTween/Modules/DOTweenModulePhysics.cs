@@ -17,57 +17,57 @@ namespace DG.Tweening
     {
         #region Shortcuts
 
-        #region Rigidbody
+        #region Player
 
-        /// <summary>Tweens a Rigidbody's position to the given value.
+        /// <summary>Tweens a Player's position to the given value.
         /// Also stores the rigidbody as the tween's target so it can be used for filtered operations</summary>
         /// <param name="endValue">The end value to reach</param><param name="duration">The duration of the tween</param>
         /// <param name="snapping">If TRUE the tween will smoothly snap all values to integers</param>
-        public static TweenerCore<Vector3, Vector3, VectorOptions> DOMove(this Rigidbody target, Vector3 endValue, float duration, bool snapping = false)
+        public static TweenerCore<Vector3, Vector3, VectorOptions> DOMove(this Player target, Vector3 endValue, float duration, bool snapping = false)
         {
             TweenerCore<Vector3, Vector3, VectorOptions> t = DOTween.To(() => target.position, target.MovePosition, endValue, duration);
             t.SetOptions(snapping).SetTarget(target);
             return t;
         }
 
-        /// <summary>Tweens a Rigidbody's X position to the given value.
+        /// <summary>Tweens a Player's X position to the given value.
         /// Also stores the rigidbody as the tween's target so it can be used for filtered operations</summary>
         /// <param name="endValue">The end value to reach</param><param name="duration">The duration of the tween</param>
         /// <param name="snapping">If TRUE the tween will smoothly snap all values to integers</param>
-        public static TweenerCore<Vector3, Vector3, VectorOptions> DOMoveX(this Rigidbody target, float endValue, float duration, bool snapping = false)
+        public static TweenerCore<Vector3, Vector3, VectorOptions> DOMoveX(this Player target, float endValue, float duration, bool snapping = false)
         {
             TweenerCore<Vector3, Vector3, VectorOptions> t = DOTween.To(() => target.position, target.MovePosition, new Vector3(endValue, 0, 0), duration);
             t.SetOptions(AxisConstraint.X, snapping).SetTarget(target);
             return t;
         }
 
-        /// <summary>Tweens a Rigidbody's Y position to the given value.
+        /// <summary>Tweens a Player's Y position to the given value.
         /// Also stores the rigidbody as the tween's target so it can be used for filtered operations</summary>
         /// <param name="endValue">The end value to reach</param><param name="duration">The duration of the tween</param>
         /// <param name="snapping">If TRUE the tween will smoothly snap all values to integers</param>
-        public static TweenerCore<Vector3, Vector3, VectorOptions> DOMoveY(this Rigidbody target, float endValue, float duration, bool snapping = false)
+        public static TweenerCore<Vector3, Vector3, VectorOptions> DOMoveY(this Player target, float endValue, float duration, bool snapping = false)
         {
             TweenerCore<Vector3, Vector3, VectorOptions> t = DOTween.To(() => target.position, target.MovePosition, new Vector3(0, endValue, 0), duration);
             t.SetOptions(AxisConstraint.Y, snapping).SetTarget(target);
             return t;
         }
 
-        /// <summary>Tweens a Rigidbody's Z position to the given value.
+        /// <summary>Tweens a Player's Z position to the given value.
         /// Also stores the rigidbody as the tween's target so it can be used for filtered operations</summary>
         /// <param name="endValue">The end value to reach</param><param name="duration">The duration of the tween</param>
         /// <param name="snapping">If TRUE the tween will smoothly snap all values to integers</param>
-        public static TweenerCore<Vector3, Vector3, VectorOptions> DOMoveZ(this Rigidbody target, float endValue, float duration, bool snapping = false)
+        public static TweenerCore<Vector3, Vector3, VectorOptions> DOMoveZ(this Player target, float endValue, float duration, bool snapping = false)
         {
             TweenerCore<Vector3, Vector3, VectorOptions> t = DOTween.To(() => target.position, target.MovePosition, new Vector3(0, 0, endValue), duration);
             t.SetOptions(AxisConstraint.Z, snapping).SetTarget(target);
             return t;
         }
 
-        /// <summary>Tweens a Rigidbody's rotation to the given value.
+        /// <summary>Tweens a Player's rotation to the given value.
         /// Also stores the rigidbody as the tween's target so it can be used for filtered operations</summary>
         /// <param name="endValue">The end value to reach</param><param name="duration">The duration of the tween</param>
         /// <param name="mode">Rotation mode</param>
-        public static TweenerCore<Quaternion, Vector3, QuaternionOptions> DORotate(this Rigidbody target, Vector3 endValue, float duration, RotateMode mode = RotateMode.Fast)
+        public static TweenerCore<Quaternion, Vector3, QuaternionOptions> DORotate(this Player target, Vector3 endValue, float duration, RotateMode mode = RotateMode.Fast)
         {
             TweenerCore<Quaternion, Vector3, QuaternionOptions> t = DOTween.To(() => target.rotation, target.MoveRotation, endValue, duration);
             t.SetTarget(target);
@@ -75,12 +75,12 @@ namespace DG.Tweening
             return t;
         }
 
-        /// <summary>Tweens a Rigidbody's rotation so that it will look towards the given position.
+        /// <summary>Tweens a Player's rotation so that it will look towards the given position.
         /// Also stores the rigidbody as the tween's target so it can be used for filtered operations</summary>
         /// <param name="towards">The position to look at</param><param name="duration">The duration of the tween</param>
         /// <param name="axisConstraint">Eventual axis constraint for the rotation</param>
         /// <param name="up">The vector that defines in which direction up is (default: Vector3.up)</param>
-        public static TweenerCore<Quaternion, Vector3, QuaternionOptions> DOLookAt(this Rigidbody target, Vector3 towards, float duration, AxisConstraint axisConstraint = AxisConstraint.None, Vector3? up = null)
+        public static TweenerCore<Quaternion, Vector3, QuaternionOptions> DOLookAt(this Player target, Vector3 towards, float duration, AxisConstraint axisConstraint = AxisConstraint.None, Vector3? up = null)
         {
             TweenerCore<Quaternion, Vector3, QuaternionOptions> t = DOTween.To(() => target.rotation, target.MoveRotation, towards, duration)
                 .SetTarget(target).SetSpecialStartupMode(SpecialStartupMode.SetLookAt);
@@ -91,15 +91,15 @@ namespace DG.Tweening
 
         #region Special
 
-        /// <summary>Tweens a Rigidbody's position to the given value, while also applying a jump effect along the Y axis.
+        /// <summary>Tweens a Player's position to the given value, while also applying a jump effect along the Y axis.
         /// Returns a Sequence instead of a Tweener.
-        /// Also stores the Rigidbody as the tween's target so it can be used for filtered operations</summary>
+        /// Also stores the Player as the tween's target so it can be used for filtered operations</summary>
         /// <param name="endValue">The end value to reach</param>
         /// <param name="jumpPower">Power of the jump (the max height of the jump is represented by this plus the final Y offset)</param>
         /// <param name="numJumps">Total number of jumps</param>
         /// <param name="duration">The duration of the tween</param>
         /// <param name="snapping">If TRUE the tween will smoothly snap all values to integers</param>
-        public static Sequence DOJump(this Rigidbody target, Vector3 endValue, float jumpPower, int numJumps, float duration, bool snapping = false)
+        public static Sequence DOJump(this Player target, Vector3 endValue, float jumpPower, int numJumps, float duration, bool snapping = false)
         {
             if (numJumps < 1) numJumps = 1;
             float startPosY = 0;
@@ -128,8 +128,8 @@ namespace DG.Tweening
             return s;
         }
 
-        /// <summary>Tweens a Rigidbody's position through the given path waypoints, using the chosen path algorithm.
-        /// Also stores the Rigidbody as the tween's target so it can be used for filtered operations.
+        /// <summary>Tweens a Player's position through the given path waypoints, using the chosen path algorithm.
+        /// Also stores the Player as the tween's target so it can be used for filtered operations.
         /// <para>NOTE: to tween a rigidbody correctly it should be set to kinematic at least while being tweened.</para>
         /// <para>BEWARE: doesn't work on Windows Phone store (waiting for Unity to fix their own bug).
         /// If you plan to publish there you should use a regular transform.DOPath.</para></summary>
@@ -141,7 +141,7 @@ namespace DG.Tweening
         /// Defaults to 10, but a value of 5 is usually enough if you don't have dramatic long curves between waypoints</param>
         /// <param name="gizmoColor">The color of the path (shown when gizmos are active in the Play panel and the tween is running)</param>
         public static TweenerCore<Vector3, Path, PathOptions> DOPath(
-            this Rigidbody target, Vector3[] path, float duration, PathType pathType = PathType.Linear,
+            this Player target, Vector3[] path, float duration, PathType pathType = PathType.Linear,
             PathMode pathMode = PathMode.Full3D, int resolution = 10, Color? gizmoColor = null
         )
         {
@@ -153,8 +153,8 @@ namespace DG.Tweening
             t.plugOptions.mode = pathMode;
             return t;
         }
-        /// <summary>Tweens a Rigidbody's localPosition through the given path waypoints, using the chosen path algorithm.
-        /// Also stores the Rigidbody as the tween's target so it can be used for filtered operations
+        /// <summary>Tweens a Player's localPosition through the given path waypoints, using the chosen path algorithm.
+        /// Also stores the Player as the tween's target so it can be used for filtered operations
         /// <para>NOTE: to tween a rigidbody correctly it should be set to kinematic at least while being tweened.</para>
         /// <para>BEWARE: doesn't work on Windows Phone store (waiting for Unity to fix their own bug).
         /// If you plan to publish there you should use a regular transform.DOLocalPath.</para></summary>
@@ -166,7 +166,7 @@ namespace DG.Tweening
         /// Defaults to 10, but a value of 5 is usually enough if you don't have dramatic long curves between waypoints</param>
         /// <param name="gizmoColor">The color of the path (shown when gizmos are active in the Play panel and the tween is running)</param>
         public static TweenerCore<Vector3, Path, PathOptions> DOLocalPath(
-            this Rigidbody target, Vector3[] path, float duration, PathType pathType = PathType.Linear,
+            this Player target, Vector3[] path, float duration, PathType pathType = PathType.Linear,
             PathMode pathMode = PathMode.Full3D, int resolution = 10, Color? gizmoColor = null
         )
         {
@@ -182,7 +182,7 @@ namespace DG.Tweening
         }
         // Used by path editor when creating the actual tween, so it can pass a pre-compiled path
         internal static TweenerCore<Vector3, Path, PathOptions> DOPath(
-            this Rigidbody target, Path path, float duration, PathMode pathMode = PathMode.Full3D
+            this Player target, Path path, float duration, PathMode pathMode = PathMode.Full3D
         )
         {
             TweenerCore<Vector3, Path, PathOptions> t = DOTween.To(PathPlugin.Get(), () => target.position, target.MovePosition, path, duration)
@@ -193,7 +193,7 @@ namespace DG.Tweening
             return t;
         }
         internal static TweenerCore<Vector3, Path, PathOptions> DOLocalPath(
-            this Rigidbody target, Path path, float duration, PathMode pathMode = PathMode.Full3D
+            this Player target, Path path, float duration, PathMode pathMode = PathMode.Full3D
         )
         {
             Transform trans = target.transform;

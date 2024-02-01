@@ -66,7 +66,7 @@ namespace FlappyBird
                 _simulated.OnSimulated();
                 _column.StartMove();
                 _bouncing.Subscribe();
-                _playerDeath.Start();
+                _playerDeath.StartWait();
                 UnsubscribeInput();
             }
         }

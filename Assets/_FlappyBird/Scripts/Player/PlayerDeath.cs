@@ -27,7 +27,7 @@ namespace FlappyBird
             _ct = _player.gameObject.GetCancellationTokenOnDestroy();
         }
 
-        public void Start()
+        public void StartWait()
         {
             Wait().Forget();
         }

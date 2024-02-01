@@ -14,23 +14,23 @@ namespace FlappyBird
         private readonly float _endValueFade = 0;
         private readonly float _endValueUnfade = 1;
         private readonly float _time;
-        private readonly PlayButton _playButton;
+        private readonly UiButton _uiButton;
 
         public CanvasMenuBlackoutRemoval(CanvasDefeatBlackout canvasDefeatBlackout,
                                          float time,
                                          Image panel,
-                                         PlayButton playButton)
+                                         UiButton uiButton)
         {
             _canvasDefeatBlackout = canvasDefeatBlackout;
             _time = time;
             _panel = panel;
-            _playButton = playButton;
+            _uiButton = uiButton;
         }
 
         public void Initialize()
         {
             _canvasDefeatBlackout.Ended += BlackoutRemoval;
-            _playButton.Pressed += Blackout;
+            _uiButton.Pressed += Blackout;
         }
 
         private void BlackoutRemoval()
@@ -59,7 +59,7 @@ namespace FlappyBird
         public void Dispose()
         {
             _canvasDefeatBlackout.Ended -= BlackoutRemoval;
-            _playButton.Pressed -= Blackout;
+            _uiButton.Pressed -= Blackout;
         }
     }
 }

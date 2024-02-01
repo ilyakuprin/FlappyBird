@@ -4,28 +4,28 @@ using Zenject;
 
 namespace FlappyBird
 {
-    public class Pause : IInitializable, IDisposable
+    public class Back : IInitializable, IDisposable
     {
         private readonly UiButton _button;
 
-        public Pause(UiButton button)
+        public Back(UiButton button)
         {
             _button = button;
         }
 
         public void Initialize()
         {
-            _button.Pressed += Stop;
+            _button.Pressed += Play;
         }
 
-        public void Stop()
+        public void Play()
         {
-            Time.timeScale = 0;
+            Time.timeScale = 1;
         }
 
         public void Dispose()
         {
-            _button.Pressed -= Stop;
+            _button.Pressed -= Play;
         }
     }
 }
