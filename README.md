@@ -1,1 +1,1 @@
-В этом проекте я польностью избавился от Monobehaviour. Использовал Zenject, UniTask, DoTween.
+В этом проекте я полностью избавился от Monobehaviour. Использовал Zenject, UniTask, DoTween.
